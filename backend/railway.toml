@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn core.wsgi --bind 0.0.0.0:$PORT"
+startCommand = "if [ -f backend/manage.py ]; then cd backend; fi; python manage.py migrate && python manage.py collectstatic --no-input && gunicorn core.wsgi --bind 0.0.0.0:$PORT"
 healthcheckPath = "/admin/login/"
 healthcheckTimeout = 180
 restartPolicyType = "ON_FAILURE"
